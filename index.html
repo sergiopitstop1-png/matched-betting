@@ -25,7 +25,11 @@
   .hero h1{font-family:'Playfair Display',serif;font-size:clamp(3rem,8vw,6rem);font-weight:900;line-height:1.05;margin-bottom:1.5rem;letter-spacing:-0.02em}
   .hero h1 span{color:var(--gold)}
   .hero p{font-size:1.15rem;color:var(--text2);max-width:580px;margin:0 auto 3rem;font-weight:300}
-  .hero-cta{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+  .hero-stats{display:flex;align-items:center;justify-content:center;gap:0;margin-top:3rem;flex-wrap:wrap;border:0.5px solid var(--border);border-radius:1rem;overflow:hidden;background:rgba(201,168,76,0.04)}
+  .hero-stat{padding:2rem 2.5rem;text-align:center;flex:1;min-width:160px}
+  .hero-stat-num{font-family:'Playfair Display',serif;font-size:2.8rem;font-weight:900;color:var(--gold);line-height:1;margin-bottom:0.5rem}
+  .hero-stat-label{font-size:0.8rem;color:var(--text2);font-weight:300;max-width:140px;margin:0 auto;line-height:1.4}
+  .hero-stat-divider{width:0.5px;height:80px;background:var(--border);flex-shrink:0}
   .btn-primary{background:var(--gold);color:var(--dark);padding:0.85rem 2.2rem;border-radius:0.25rem;font-weight:500;font-size:0.9rem;text-decoration:none;letter-spacing:0.05em;transition:all 0.2s}
   .btn-primary:hover{background:var(--gold-light)}
   .btn-outline{border:0.5px solid var(--gold);color:var(--gold);padding:0.85rem 2.2rem;border-radius:0.25rem;font-weight:500;font-size:0.9rem;text-decoration:none;letter-spacing:0.05em;transition:all 0.2s}
@@ -224,9 +228,21 @@
   <div class="hero-badge">Guida completa al matched betting</div>
   <h1>Profitto<br><span>garantito</span><br>dal betting</h1>
   <p>Una tecnica legale e matematicamente provata per trasformare i bonus dei bookmaker in reddito reale, eliminando il rischio.</p>
-  <div class="hero-cta">
-    <a href="mailto:italiamatchedbetting@gmail.com" class="btn-primary">Contattami gratis</a>
-    <a href="#corsi" class="btn-outline">Scopri i corsi</a>
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <div class="hero-stat-num" id="stat1">0</div>
+      <div class="hero-stat-label">€ guadagnati in media nei primi 3 mesi</div>
+    </div>
+    <div class="hero-stat-divider"></div>
+    <div class="hero-stat">
+      <div class="hero-stat-num" id="stat2">0</div>
+      <div class="hero-stat-label">bookmaker sfruttabili in Italia</div>
+    </div>
+    <div class="hero-stat-divider"></div>
+    <div class="hero-stat">
+      <div class="hero-stat-num" id="stat3">0</div>
+      <div class="hero-stat-label">% bonus convertibili in profitto</div>
+    </div>
   </div>
 </section>
 
@@ -574,6 +590,25 @@ document.addEventListener('DOMContentLoaded',function(){
       target.scrollIntoView({behavior:'smooth',block:'start'});
     });
   });
+});
+
+// Animated counters
+function animateCounter(id, target, suffix){
+  var el=document.getElementById(id);
+  if(!el)return;
+  var start=0;
+  var duration=2000;
+  var step=target/duration*16;
+  var timer=setInterval(function(){
+    start+=step;
+    if(start>=target){start=target;clearInterval(timer);}
+    el.textContent=Math.floor(start).toLocaleString("it-IT")+(suffix||"");
+  },16);
+}
+window.addEventListener("load",function(){
+  animateCounter("stat1",2400,"");
+  animateCounter("stat2",50,"");
+  animateCounter("stat3",98,"");
 });
 </script>
 </body>

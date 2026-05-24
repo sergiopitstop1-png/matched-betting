@@ -571,8 +571,7 @@ document.addEventListener('DOMContentLoaded',function(){
       e.preventDefault();
       var target=document.querySelector(href);
       if(!target)return;
-      var top=target.getBoundingClientRect().top+window.pageYOffset-80;
-      window.scrollTo({top:top,behavior:'smooth'});
+      target.scrollIntoView({behavior:'smooth',block:'start'});
     });
   });
 });
